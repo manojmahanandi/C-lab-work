@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* left , *right;
+};
+void Inorder(struct node* root)
+{
+    if(root==NULL)
+    return;
+    Inorder(root->left);
+    printf("%d",root->data);
+    Inorder(root->right);
+}
+struct node* createNode(int value)
+{
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return(newNode);
+}
+struct node* insertLeft(struct node* root, int value)
+{
+    root->left = createNode( value);
+    return root->left;
+}
+struct node* insertRight(struct node* root, int value)
+{
+root->right = createNode( value);
+return root->right;
+}
+int main()
+{
+    struct node* root = createNode(1);
+    insertLeft(root,8);
+    insertRight(root,3);
+    insertLeft(root->left, 9);
+    insertRight(root->right, 7);
+
+    printf("\ninorder traversal \n");
+    Inorder(root);
+
+}
